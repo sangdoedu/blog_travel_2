@@ -36,7 +36,20 @@ DESTINATIONS = [
     ("🛶", "Mekong Delta"),
     ("🏙️", "Ho Chi Minh City"),
     ("🗻", "Fansipan"),
+    ("🏯", "Hoi An"),
+    ("👑", "Hue"),
+    ("🌊", "Ha Long Bay"),
+    ("🚂", "Ninh Binh"),
+    ("🌸", "Da Lat"),
+    ("🐚", "Nha Trang"),
+    ("🏍️", "Ha Giang"),
+    ("🕌", "Hanoi"),
+    ("🦭", "Con Dao"),
+    ("🍵", "Moc Chau"),
+    ("🪨", "Phong Nha"),
+    ("🏝️", "Quy Nhon"),
 ]
+DESTINATIONS_PER_ROW = 6
 
 st.markdown(
     """
@@ -76,9 +89,11 @@ for col, post in zip(st.columns(len(FEATURED)), FEATURED):
 
 st.write("")
 st.subheader("Explore by destination")
-for col, (emoji, name) in zip(st.columns(len(DESTINATIONS)), DESTINATIONS):
-    with col, st.container(border=True):
-        st.markdown(f"<div style='text-align:center'><div class='card-emoji'>{emoji}</div>{name}</div>", unsafe_allow_html=True)
+for start in range(0, len(DESTINATIONS), DESTINATIONS_PER_ROW):
+    row = DESTINATIONS[start:start + DESTINATIONS_PER_ROW]
+    for col, (emoji, name) in zip(st.columns(DESTINATIONS_PER_ROW), row):
+        with col, st.container(border=True):
+            st.markdown(f"<div style='text-align:center'><div class='card-emoji'>{emoji}</div>{name}</div>", unsafe_allow_html=True)
 
 st.write("")
 about, newsletter = st.columns(2, gap="large")
